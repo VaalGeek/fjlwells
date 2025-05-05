@@ -17,9 +17,9 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     includeAssets: ['icons/*.png', 'favicon.ico'], // Include static assets
     manifest: {
-      name: 'Setlabotjha Primary School App',
-      short_name: 'SetlabotjhaPs',
-      description: 'School website',
+      name: 'FJL Wells Primary School App',
+      short_name: 'FJL Wells',
+      description: 'School App',
       theme_color: '#ffffff',
       background_color: '#ffffff',
       display: 'standalone',
