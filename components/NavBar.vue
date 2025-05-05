@@ -32,15 +32,15 @@
       <div class="md:hidden flex flex-col ml-4 gap-1 text-white text-xs">
         <div class="flex items-center gap-1">
           <UIcon name="i-heroicons-map-pin" class="w-4 h-4" />
-          <span>Sebokeng Zone 10</span>
+          <span>{{ config.public.address }}</span>
         </div>
         <div class="flex items-center gap-1">
           <UIcon name="i-heroicons-phone" class="w-4 h-4" />
-          <span>+27 71 234 5678</span>
+          <span>{{ config.public.tel }}</span>
         </div>
         <div class="flex items-center gap-1">
           <UIcon name="i-heroicons-envelope" class="w-4 h-4" />
-          <span>info@setlabothja.co.za</span>
+          <span>{{ config.public.email }}</span>
         </div>
       </div>
 

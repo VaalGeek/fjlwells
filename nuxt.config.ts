@@ -73,6 +73,9 @@ export default defineNuxtConfig({
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY,
       showMenu: process.env.SHOW_MENU,
+      address:process.env.ADDRESS,
+      email:process.env.EMAIL,
+      tel:process.env.TEL
       
     }
   },

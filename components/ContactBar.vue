@@ -46,8 +46,8 @@ const socialIcons = [
 ]
 
 const contactItems = [
-  { icon: 'i-heroicons-map-pin-solid', text: '25/B Milford Road, New York' },
-  { icon: 'i-heroicons-envelope-solid', text: 'info@eazydata.com' },
-  { icon: 'i-heroicons-phone-solid', text: '+2 123 654 7898' },
+  { icon: 'i-heroicons-map-pin-solid', text: config.public.address },
+  { icon: 'i-heroicons-envelope-solid', text: config.public.email },
+  { icon: 'i-heroicons-phone-solid', text: config.public.tel },
 ]
 </script>
