@@ -212,10 +212,16 @@ declare module 'nuxt/schema' {
 
    showMenu: string,
 
-   supabase: {
-      url: any,
+   address: string,
 
-      key: any,
+   email: string,
+
+   tel: string,
+
+   supabase: {
+      url: string,
+
+      key: string,
 
       redirect: boolean,
 
@@ -233,7 +239,7 @@ declare module 'nuxt/schema' {
 
       cookieName: string,
 
-      cookiePrefix: any,
+      cookiePrefix: string,
 
       useSsrCookies: boolean,
 
