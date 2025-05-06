@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody, createError } from 'h3'
 import { sendPushNotification } from '~/utils/notifications'
 import { Stakeholder } from '~/server/models/Stakeholder'
-import Newsletter from '~/server/models/Newsletter'
+
 
 export default defineEventHandler(async (event) => {
   try {
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
         body: description.trim(),
         icon: '/icon.png',
         badge: '/icon.png',
-        click_action: `https://setlabotjhaps.netlify.app/newsletters?nid=${newsletterId}`,
+        click_action: `${process.env.BASE_URL}/newsletters?nid=${newsletterId}`,
       },
     }
 

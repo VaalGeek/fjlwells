@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
                   body: message.trim(),
                   icon: "/icon.png",
                   badge: "/icon.png",
-                  click_action: `https://setlabotjhaps.netlify.app/announcements?msgId=${savedAnnouncement._id.toString()}`,
+                  click_action: `${process.env.BASE_URL}/announcements?msgId=${savedAnnouncement._id.toString()}`,
                 }
               }
               
