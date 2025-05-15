@@ -27,43 +27,59 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
+// Emit event to dismiss modal
 const emit = defineEmits(['dismiss'])
 
+// Modal visibility
 const visible = ref(true)
+
+// Instruction lines to show
 const instructions = ref<string[]>([])
 
+// Device and browser info
 const deviceInfo = ref({
   os: 'Unknown',
   browser: 'Unknown',
   isPushSupported: false,
   isIphone13: false,
-  isOppo: false
+  isOppo: false,
 })
 
-function detectDevice(): typeof deviceInfo.value {
+// Detect user device and browser
+function detectDevice() {
   const ua = navigator.userAgent.toLowerCase()
 
   const isIOS = /iphone|ipad|ipod/.test(ua)
-  const isIphone13 = ua.includes('iphone') && window.screen.height === 844 && window.screen.width === 390
   const isAndroid = ua.includes('android')
+  const isIphone13 = ua.includes('iphone') && window.screen.height === 844 && window.screen.width === 390
   const isOppo = ua.includes('oppo')
   const isChrome = ua.includes('chrome') && !ua.includes('edg')
   const isSafari = ua.includes('safari') && !ua.includes('chrome')
-  const pushSupported = 'Notification' in window && 'serviceWorker' in navigator
+  const isPushSupported = 'Notification' in window && 'serviceWorker' in navigator
 
   return {
     os: isIOS ? 'iOS' : isAndroid ? 'Android' : 'Other',
     browser: isChrome ? 'Chrome' : isSafari ? 'Safari' : 'Other',
-    isPushSupported: pushSupported,
+    isPushSupported,
     isIphone13,
-    isOppo
+    isOppo,
   }
 }
 
+// Run on mount
 onMounted(() => {
+  // Only show modal on mobile or tablet
+  const isMobileOrTablet = window.innerWidth <= 1024
+  if (!isMobileOrTablet) {
+    visible.value = false
+    return
+  }
+
+  // Detect device
   deviceInfo.value = detectDevice()
   const { os, browser, isPushSupported, isIphone13, isOppo } = deviceInfo.value
 
+  // If push notifications not supported
   if (!isPushSupported) {
     instructions.value.push(
       '<strong>Notifications are not supported</strong> on this browser or device.',
@@ -72,43 +88,47 @@ onMounted(() => {
     return
   }
 
+  // iOS-specific instructions
   if (os === 'iOS') {
     instructions.value.push(
-      '1. Tap the <strong>Share icon (📤)</strong> at the bottom.',
+      '1. Tap the <strong>Share icon (📤)</strong> at the bottom of Safari.',
       '2. Select <strong>"Add to Home Screen"</strong>.'
     )
 
     if (isIphone13) {
       instructions.value.push(
-        '<strong>Note:</strong> iPhone 13 may not show the "Add to Home Screen" option immediately.',
-        'Please make sure you are using Safari browser and have no screen zoom or content blockers enabled.'
+        '<strong>Note:</strong> iPhone 13 may not show "Add to Home Screen" immediately.',
+        'Make sure you are using Safari and that screen zoom or content blockers are disabled.'
       )
     }
   }
 
+  // Android-specific instructions
   if (os === 'Android') {
     if (isOppo) {
       instructions.value.push(
         '<strong>Oppo devices</strong> may block notifications by default.',
         '1. Go to <strong>Settings > App Management > Chrome > Notifications</strong> and enable them.',
-        '2. Also open <strong>Chrome > Settings > Site Settings > Notifications</strong> and allow notification requests.'
+        '2. Open <strong>Chrome > Settings > Site Settings > Notifications</strong> and allow them.'
       )
     } else if (browser === 'Chrome') {
       instructions.value.push(
-        '1. Go to your <strong>Phone Settings > Notifications > Chrome</strong> and ensure <strong>Allow Notifications</strong> is ON.',
-        '2. Open <strong>Chrome</strong>, tap the 3-dot menu (⋮), then go to <strong>Settings > Site Settings > Notifications</strong>.',
-        '3. Make sure <strong>"Sites can ask to send notifications"</strong> is enabled.'
+        '1. Go to <strong>Settings > Notifications > Chrome</strong> and make sure notifications are allowed.',
+        '2. In Chrome, tap the 3-dot menu (⋮), go to <strong>Settings > Site Settings > Notifications</strong>.',
+        '3. Ensure <strong>"Sites can ask to send notifications"</strong> is enabled.'
       )
     }
   }
 
+  // Fallback if no specific instructions were added
   if (instructions.value.length === 0) {
     instructions.value.push(
-      'We could not detect your device. Please ensure notifications are enabled for your browser in device settings.'
+      'We could not detect your device. Please ensure notifications are enabled in your browser settings.'
     )
   }
 })
 </script>
+
 
 <style scoped>
 .fade-enter-active,
