@@ -1,11 +1,18 @@
 <template>
   <transition name="fade">
-    <div v-if="visible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div v-if="visible" class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white rounded-2xl shadow-xl p-6 w-[90%] max-w-md text-sm text-gray-700 space-y-4">
         <h2 class="text-lg font-semibold text-gray-800 text-center">Device Setup Instructions</h2>
+        
+        <div class="text-center text-gray-600 text-sm mb-2">
+          <p><strong>Detected Device:</strong> {{ deviceInfo.os }}</p>
+          <p><strong>Browser:</strong> {{ deviceInfo.browser }}</p>
+        </div>
+
         <ul class="list-disc space-y-2 pl-5">
           <li v-for="(line, i) in instructions" :key="i" v-html="line" />
         </ul>
+
         <button
           @click="$emit('dismiss')"
           class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
@@ -18,14 +25,22 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(['dismiss'])
 
 const visible = ref(true)
 const instructions = ref<string[]>([])
 
-function detectDevice(): { os: string; browser: string; isPushSupported: boolean; isIphone13: boolean; isOppo: boolean } {
+const deviceInfo = ref({
+  os: 'Unknown',
+  browser: 'Unknown',
+  isPushSupported: false,
+  isIphone13: false,
+  isOppo: false
+})
+
+function detectDevice(): typeof deviceInfo.value {
   const ua = navigator.userAgent.toLowerCase()
 
   const isIOS = /iphone|ipad|ipod/.test(ua)
@@ -46,7 +61,8 @@ function detectDevice(): { os: string; browser: string; isPushSupported: boolean
 }
 
 onMounted(() => {
-  const { os, browser, isPushSupported, isIphone13, isOppo } = detectDevice()
+  deviceInfo.value = detectDevice()
+  const { os, browser, isPushSupported, isIphone13, isOppo } = deviceInfo.value
 
   if (!isPushSupported) {
     instructions.value.push(
@@ -58,10 +74,8 @@ onMounted(() => {
 
   if (os === 'iOS') {
     instructions.value.push(
-    
       '1. Tap the <strong>Share icon (📤)</strong> at the bottom.',
       '2. Select <strong>"Add to Home Screen"</strong>.'
-
     )
 
     if (isIphone13) {
