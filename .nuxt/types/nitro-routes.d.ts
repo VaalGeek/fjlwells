@@ -66,6 +66,9 @@ declare module "nitropack/types" {
     '/api/stakeholders/assignGroup': {
       'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/stakeholders/assignGroup.post').default>>>>
     }
+    '/api/stakeholders/check-stakeholder': {
+      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/stakeholders/check-stakeholder').default>>>>
+    }
     '/api/stakeholders/fetchByRole': {
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/stakeholders/fetchByRole.get').default>>>>
     }

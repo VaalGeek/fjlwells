@@ -80,6 +80,8 @@
       <p v-if="message" class="text-center text-sm text-green-600">{{ message }}</p>
       <p v-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
     </div>
+    <DeviceInstructionModal v-if="showDeviceModal" @dismiss="showDeviceModal = false" />
+
   </div>
 </template>
 
@@ -97,6 +99,7 @@ const route = useRoute()
 const router = useRouter()
 const { $messaging } = useNuxtApp()
 const config = useRuntimeConfig()
+const showDeviceModal = ref(true) // default to true
 
 const email = ref('')
 const mobile = ref('')

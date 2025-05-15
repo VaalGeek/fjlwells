@@ -18,6 +18,7 @@ interface _GlobalComponents {
     'Calendar': typeof import("../components/Calendar.vue")['default']
     'ContactBar': typeof import("../components/ContactBar.vue")['default']
     'DashboardHeader': typeof import("../components/DashboardHeader.vue")['default']
+    'DeviceInstructionModal': typeof import("../components/DeviceInstructionModal.vue")['default']
     'Donations': typeof import("../components/Donations.vue")['default']
     'EventModal': typeof import("../components/EventModal.vue")['default']
     'FAB': typeof import("../components/FAB.vue")['default']
@@ -140,6 +141,7 @@ interface _GlobalComponents {
     'LazyCalendar': LazyComponent<typeof import("../components/Calendar.vue")['default']>
     'LazyContactBar': LazyComponent<typeof import("../components/ContactBar.vue")['default']>
     'LazyDashboardHeader': LazyComponent<typeof import("../components/DashboardHeader.vue")['default']>
+    'LazyDeviceInstructionModal': LazyComponent<typeof import("../components/DeviceInstructionModal.vue")['default']>
     'LazyDonations': LazyComponent<typeof import("../components/Donations.vue")['default']>
     'LazyEventModal': LazyComponent<typeof import("../components/EventModal.vue")['default']>
     'LazyFAB': LazyComponent<typeof import("../components/FAB.vue")['default']>
@@ -268,6 +270,7 @@ export const Announcements: typeof import("../components/Announcements.vue")['de
 export const Calendar: typeof import("../components/Calendar.vue")['default']
 export const ContactBar: typeof import("../components/ContactBar.vue")['default']
 export const DashboardHeader: typeof import("../components/DashboardHeader.vue")['default']
+export const DeviceInstructionModal: typeof import("../components/DeviceInstructionModal.vue")['default']
 export const Donations: typeof import("../components/Donations.vue")['default']
 export const EventModal: typeof import("../components/EventModal.vue")['default']
 export const FAB: typeof import("../components/FAB.vue")['default']
@@ -390,6 +393,7 @@ export const LazyAnnouncements: LazyComponent<typeof import("../components/Annou
 export const LazyCalendar: LazyComponent<typeof import("../components/Calendar.vue")['default']>
 export const LazyContactBar: LazyComponent<typeof import("../components/ContactBar.vue")['default']>
 export const LazyDashboardHeader: LazyComponent<typeof import("../components/DashboardHeader.vue")['default']>
+export const LazyDeviceInstructionModal: LazyComponent<typeof import("../components/DeviceInstructionModal.vue")['default']>
 export const LazyDonations: LazyComponent<typeof import("../components/Donations.vue")['default']>
 export const LazyEventModal: LazyComponent<typeof import("../components/EventModal.vue")['default']>
 export const LazyFAB: LazyComponent<typeof import("../components/FAB.vue")['default']>
